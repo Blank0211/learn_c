@@ -1,4 +1,17 @@
 // [[ Chapter 7, Project 12 ]]
+//
+// Write a program that evaluates an expression:
+//
+// ==== PROGRAM EXAMPLE ====
+// Enter an expression: 1+2.5*3
+// Value of expression: 10.5
+// ==== EXAMPLE END ====
+//
+// The operands in the expression are floating-point numbers;
+// the operators are +, -, *, and /. The expression is evaluated from
+// left to right (no operator takes precedence over any other operator).
+
+
 #include <stdio.h>
 
 void evaler(void) {
