@@ -3,16 +3,16 @@
 
 #include <stdio.h>
 
-// Uses two variables: n, sum
+// Uses two variables: n, fact
 void fac(void) {
     printf("Enter a positive integer: ");
     int n; scanf("%d", &n);
 
-    int sum = n;
-    for (int i = n-1; i > 1; i--) {
-        sum *= i;
+    int fact = 1;
+    for (int i = n; i > 1; i--) {
+        fact *= i;
     }
-    printf("Factorial of %d: %d\n", n, sum);
+    printf("Factorial of %d: %d\n", n, fact);
 }
 
 // Uses one variable: n
