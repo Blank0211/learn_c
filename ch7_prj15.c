@@ -1,5 +1,6 @@
 // [[ Chapter 7, Project 15 ]]
 // Write a program that computes the factorial of a positive integer.
+// IMPORTANT: Windows does not support long double types.
 
 #include <stdio.h>
 
