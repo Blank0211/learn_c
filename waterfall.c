@@ -1,39 +1,45 @@
 // clang % -o a.exe -std=c18 -Wall -Wextra -pedantic -Wformat=2
 #include <stdio.h>
 #include <stdint.h>
+
 #define bool int8_t
 #define true 1
 #define false 0
 
-#define N 5
-void revnum(void) {
-    // Reverses a series of numbers
-    printf("Enter %d numbers: ", N);
-    int ns[N];
-    for (int i = 0; i < N; i++) scanf("%d", &ns[i]);
+#define SIZE_a ((int) (sizeof(a) / sizeof(a[0])))
 
-    printf("In reverse order: ");
-    for (int i = N-1; i >= 0; i--) printf("%d ", ns[i]);
-}
+void interest_c(void) {
+    printf("Enter interest rate: ");
+    int rate; scanf("%d", &rate);
+    printf("Enter number of years: ");
+    int yrs; scanf("%d", &yrs);
 
-void repdig(void) {
-    // Checks numbers for repeated digits
-    printf("Enter a number: ");
-    int n; scanf("%d", &n);
-
-    bool dig_seen[10] = {false};
-    while (n > 0) {
-        if (dig_seen[n%10]) break;
-
-        dig_seen[n%10] = true;
-        n /= 10;
+    // Prepare table headers
+    float a[5];
+    printf("\nYears"); 
+    for (int i = 0; i < SIZE_a; i++) {
+        printf("%6d%%", rate + i);
+        a[i] = 100.00f; // init all values to 100.00f
     }
+    printf("\n");
 
-    printf("%s\n", n > 0 ? "Repeated digit" : "No repeated digit");
+    // Table contents
+    for (int i = 1; i <= yrs; i++) {
+        printf("%3d   ", i); // Year number
+
+        // Int rates
+        for (int j = 0; j < SIZE_a; j++) {
+            int rt = rate + j;
+            // Display and update array
+            printf("%7.2f ", a[j] *= (rt / 100.0f + 1.0f));
+        }
+
+        printf("\n");
+    }
 }
 
 int main(void) {
-    repdig();
+    interest_c();
     return 0;
 }
 
