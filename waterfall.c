@@ -14,7 +14,7 @@ void interest_c(void) {
     printf("Enter number of years: ");
     int yrs; scanf("%d", &yrs);
 
-    // Prepare table headers
+    // table headers
     float a[5];
     printf("\nYears"); 
     for (int i = 0; i < SIZE_a; i++) {
