@@ -1,45 +1,41 @@
 // clang % -o a.exe -std=c18 -Wall -Wextra -pedantic -Wformat=2
 #include <stdio.h>
 #include <stdint.h>
+#include <time.h>
+#include <stdlib.h>
 
 #define bool int8_t
 #define true 1
 #define false 0
 
-#define SIZE_a ((int) (sizeof(a) / sizeof(a[0])))
+void deal_c(void) {
+    printf("Enter number of cards in hand: ");
+    int n_crd; scanf("%d", &n_crd);
 
-void interest_c(void) {
-    printf("Enter interest rate: ");
-    int rate; scanf("%d", &rate);
-    printf("Enter number of years: ");
-    int yrs; scanf("%d", &yrs);
+    bool in_hand[4][13] = {false};
+    const char suits[4] = {'s', 'c', 'd', 'h'};
+    const char ranks[13] = {'2', '3', '4', '5', '6', '7', '8', '9', '0',
+                            'j', 'q', 'k', 'a'}; // '0' is ten
 
-    // table headers
-    float a[5];
-    printf("\nYears"); 
-    for (int i = 0; i < SIZE_a; i++) {
-        printf("%6d%%", rate + i);
-        a[i] = 100.00f; // init all values to 100.00f
+    srand(time(NULL));
+    int st, rnk;
+    printf("Your hand:");
+    while (n_crd > 0) {
+        // Pick a random card
+        st = rand() % 4;
+        rnk = rand() % 13;
+        if (in_hand[st][rnk]) continue;
+
+        // Display card & mark it as in_hand.
+        printf(" %c%c",ranks[rnk], suits[st]);
+        in_hand[st][rnk] = true;
+        n_crd--;
     }
     printf("\n");
-
-    // Table contents
-    for (int i = 1; i <= yrs; i++) {
-        printf("%3d   ", i); // Year number
-
-        // Int rates
-        for (int j = 0; j < SIZE_a; j++) {
-            int rt = rate + j;
-            // Display and update array
-            printf("%7.2f ", a[j] *= (rt / 100.0f + 1.0f));
-        }
-
-        printf("\n");
-    }
 }
 
 int main(void) {
-    interest_c();
+    deal_c();
     return 0;
 }
 
