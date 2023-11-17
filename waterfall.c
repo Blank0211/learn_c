@@ -12,12 +12,12 @@ void deal_c(void) {
     printf("Enter number of cards in hand: ");
     int n_crd; scanf("%d", &n_crd);
 
-    bool in_hand[4][13] = {false};
-    const char suits[4] = {'s', 'c', 'd', 'h'};
-    const char ranks[13] = {'2', '3', '4', '5', '6', '7', '8', '9', '0',
-                            'j', 'q', 'k', 'a'}; // '0' is ten
+    bool in_hand[4][13]  =  {false}; // Will represent cards already in-hand
+    const char suits[4]  =  {'s', 'c', 'd', 'h'};
+    const char ranks[13] =  {'2', '3', '4', '5', '6', '7', '8', '9', '0',
+                             'j', 'q', 'k', 'a'}; // '0' is ten
 
-    srand(time(NULL));
+    srand(time(NULL)); // Provide seed for rand()
     int st, rnk;
     printf("Your hand:");
     while (n_crd > 0) {
@@ -26,9 +26,9 @@ void deal_c(void) {
         rnk = rand() % 13;
         if (in_hand[st][rnk]) continue;
 
-        // Display card & mark it as in_hand.
-        printf(" %c%c",ranks[rnk], suits[st]);
-        in_hand[st][rnk] = true;
+        printf(" %c%c",ranks[rnk], suits[st]); // Display card
+        in_hand[st][rnk] = true;               // and mark it as in-hand
+
         n_crd--;
     }
     printf("\n");
