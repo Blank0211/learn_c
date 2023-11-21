@@ -6,16 +6,26 @@
 #define true 1
 #define false 0
 
-void fib(void) {
-    uint32_t fibs[40] = {0, 1};
-    for (int i = 2; i < 40; i++)
-        fibs[i] = fibs[i-1] + fibs[i-2];
+void avg_temps(void) {
+    const uint8_t days = 30, hours = 24;
+    double temp_readings[days][hours];
+    for (int d = 0; d < days; d++) {// Set all values to 30.0
+        for (int h = 0; h < hours; h++)
+            temp_readings[d][h] = 30.0;
+    }
 
-    for (int i = 0; i < 40; i++) printf("%d, ", fibs[i]);
+    double tmp_avg = 0.0;
+    for (int d = 0; d < days; d++) {
+        for (int h = 0; h < hours; h++)
+            tmp_avg += temp_readings[d][h];
+    }
+
+    tmp_avg /= (days * hours);
+    printf("Average temp for month: %.2f\n", tmp_avg);
 }
 
 int main(void) {
-    fib();
+    avg_temps();
     return 0;
 }
 
