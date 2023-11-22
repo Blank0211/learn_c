@@ -9,9 +9,9 @@
 void avg_temps(void) {
     const uint8_t days = 30, hours = 24;
     double temp_readings[days][hours];
-    for (int d = 0; d < days; d++) {// Set all values to 30.0
+    for (int d = 0; d < days; d++) {
         for (int h = 0; h < hours; h++)
-            temp_readings[d][h] = 30.0;
+            temp_readings[d][h] = 30.0; // Set all values to 30.0
     }
 
     double tmp_avg = 0.0;
