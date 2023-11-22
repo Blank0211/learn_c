@@ -6,26 +6,27 @@
 #define true 1
 #define false 0
 
-void avg_temps(void) {
-    const uint8_t days = 30, hours = 24;
-    double temp_readings[days][hours];
-    for (int d = 0; d < days; d++) {
-        for (int h = 0; h < hours; h++)
-            temp_readings[d][h] = 30.0; // Set all values to 30.0
+#define ROW 8
+#define COL 8
+void chess(void) {
+    char board[ROW][COL] = { {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'}, 
+                             {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
+                             {' ', '.', ' ', '.', ' ', '.', ' ', '.'},
+                             {'.', ' ', '.', ' ', '.', ' ', '.', ' '},
+                             {' ', '.', ' ', '.', ' ', '.', ' ', '.'},
+                             {'.', ' ', '.', ' ', '.', ' ', '.', ' '},
+                             {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
+                             {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'}, };
+    // Display board
+    for (int r = 0; r < ROW; r++) {
+        for (int c = 0; c < COL; c++)
+            printf(" %c", board[r][c]);
+        printf("\n");
     }
-
-    double tmp_avg = 0.0;
-    for (int d = 0; d < days; d++) {
-        for (int h = 0; h < hours; h++)
-            tmp_avg += temp_readings[d][h];
-    }
-
-    tmp_avg /= (days * hours);
-    printf("Average temp for month: %.2f\n", tmp_avg);
 }
 
 int main(void) {
-    avg_temps();
+    chess();
     return 0;
 }
 
