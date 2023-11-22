@@ -8,25 +8,27 @@
 
 #define ROW 8
 #define COL 8
-void chess(void) {
-    char board[ROW][COL] = { {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'}, 
-                             {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                             {' ', '.', ' ', '.', ' ', '.', ' ', '.'},
-                             {'.', ' ', '.', ' ', '.', ' ', '.', ' '},
-                             {' ', '.', ' ', '.', ' ', '.', ' ', '.'},
-                             {'.', ' ', '.', ' ', '.', ' ', '.', ' '},
-                             {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                             {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'}, };
-    // Display board
+void chkr(void) {
+    char checker_board[ROW][COL] = {0};
+
+    // Set values
+    for (int r = 0; r < ROW; r++) {
+        for (int c = 0; c < COL; c++) {
+            if ((r + c) % 2 == 0) checker_board[r][c] = 'B';
+            else                  checker_board[r][c] = 'R';
+        }
+    }
+
+    // Display checker board
     for (int r = 0; r < ROW; r++) {
         for (int c = 0; c < COL; c++)
-            printf(" %c", board[r][c]);
+            printf(" %c", checker_board[r][c]);
         printf("\n");
     }
 }
 
 int main(void) {
-    chess();
+    chkr();
     return 0;
 }
 
