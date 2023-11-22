@@ -13,10 +13,8 @@ void chkr(void) {
 
     // Set values
     for (int r = 0; r < ROW; r++) {
-        for (int c = 0; c < COL; c++) {
-            if ((r + c) % 2 == 0) checker_board[r][c] = 'B';
-            else                  checker_board[r][c] = 'R';
-        }
+        for (int c = 0; c < COL; c++)
+            checker_board[r][c] = (r + c) % 2 == 0 ? 'B' : 'R';
     }
 
     // Display checker board
