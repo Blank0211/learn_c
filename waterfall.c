@@ -6,27 +6,31 @@
 #define true 1
 #define false 0
 
-#define ROW 8
-#define COL 8
-void chkr(void) {
-    char checker_board[ROW][COL] = {0};
+#define DIGS 10
+void repdig(void) {
+    // Checks numbers for repeated digits
+    // and shows which digits (if any) were repeated
+    printf("Enter a number: ");
+    int n; scanf("%d", &n);
 
-    // Set values
-    for (int r = 0; r < ROW; r++) {
-        for (int c = 0; c < COL; c++)
-            checker_board[r][c] = (r + c) % 2 == 0 ? 'B' : 'R';
+    bool dig_seen[DIGS] = {false};
+    bool dig_repeat[DIGS]= {false}
+    while (n > 0) {
+        if (dig_seen[n%10]) dig_repeat[n%10] = true;
+
+        dig_seen[n%10] = true;
+        n /= 10
     }
 
-    // Display checker board
-    for (int r = 0; r < ROW; r++) {
-        for (int c = 0; c < COL; c++)
-            printf(" %c", checker_board[r][c]);
-        printf("\n");
-    }
+    // Display repeated digits (if any)
+    printf("Repeated digit(s): ");
+    for (int i = 0; i < DIGS; i++)
+        if (dig_repeat[i]) printf("%d ", i);
+    printf("\n");
 }
 
 int main(void) {
-    chkr();
+    what();
     return 0;
 }
 
