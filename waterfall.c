@@ -8,29 +8,27 @@
 
 #define DIGS 10
 void repdig(void) {
-    // Checks numbers for repeated digits
-    // and shows which digits (if any) were repeated
+    // Checks a number for repeated digits and prints a table
+    // showing how many time each digit appears in number.
     printf("Enter a number: ");
     int n; scanf("%d", &n);
 
-    bool dig_seen[DIGS] = {false};
-    bool dig_repeat[DIGS]= {false}
+    // Check the number
+    int8_t dig_seen[DIGS] = {0};
     while (n > 0) {
-        if (dig_seen[n%10]) dig_repeat[n%10] = true;
-
-        dig_seen[n%10] = true;
-        n /= 10
+        dig_seen[n%10]++;
+        n /= 10;
     }
 
-    // Display repeated digits (if any)
-    printf("Repeated digit(s): ");
+    // Print table
+    printf("Digit:        0  1  2  3  4  5  6  7  8  9\n");
+    printf("Occurrences:  ");
     for (int i = 0; i < DIGS; i++)
-        if (dig_repeat[i]) printf("%d ", i);
-    printf("\n");
+        printf("%d  ", dig_seen[i]);
 }
 
 int main(void) {
-    what();
+    repdig();
     return 0;
 }
 
