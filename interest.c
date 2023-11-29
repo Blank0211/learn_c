@@ -21,8 +21,11 @@ void interest_c(void) {
         // Int rates
         for (int j = 0; j < SIZE_a; j++) {
             int rt = rate + j;
-            // Display and update array
-            printf("%7.2f ", a[j] *= (rt / 100.0f + 1.0f));
+
+            // Compound intrest monthly.
+            for (int m = 0; m < 12; m++) 
+                a[j] *= ((double) rt / 12.0 / 100.0f + 1.0f);
+            printf("%7.2f ", a[j]);
         }
         printf("\n");
     }
