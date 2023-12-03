@@ -1,38 +1,55 @@
 // clang % -o a.exe -std=c18 -Wall -Wextra -pedantic -Wformat=2 -g
 #include <stdio.h>
 #include <stdint.h>
+#include <ctype.h>
 
 #define bool _Bool
 #define true 1
 #define false 0
 
-#define DIGS 10
-void repdig(void) {
-    // Checks a number for repeated digits and prints a table
-    // showing how many time each digit appears in number.
-    while (true) {
-        printf("Enter a number: ");
-        int n; scanf("%d", &n);
-        if (n <= 0) return; // Terminate program if input <= 0.
-
-        // Check the number
-        int8_t dig_seen[DIGS] = {0};
-        while (n > 0) {
-            dig_seen[n%10]++;
-            n /= 10;
-        }
-
-        // Print table
-        printf("Digit:        0  1  2  3  4  5  6  7  8  9\n");
-        printf("Occurrences:  ");
-        for (int i = 0; i < DIGS; i++)
-            printf("%d  ", dig_seen[i]);
-        printf("\n");
+#define MSG_LEN 80
+void biff(void) {
+    printf("Enter message: ");
+    char msg[MSG_LEN] = {0};
+    // Get & store message (until newline)
+    for (int i = 0; i < MSG_LEN; i++) {
+        msg[i] = getchar();
+        if (msg[i] == '\n') break;
     }
+    
+    // Trasnlate to B1FF-speak
+    for (int c = 0; c < MSG_LEN; c++)
+        msg[c] = toupper(msg[c]); // Make all chars to uppercase
+    // Substitue digits for certain letters 
+    for (int c = 0; c < MSG_LEN; c++) {
+        switch (msg[c]) {
+            case 'A':
+                msg[c] = '4'; break;
+            case 'B':
+                msg[c] = '8'; break;
+            case 'E':
+                msg[c] = '3'; break;
+            case 'I':
+                msg[c] = '1'; break;
+            case 'O':
+                msg[c] = '0'; break;
+            case 'S':
+                msg[c] = '5'; break;
+            default:
+                break;
+        }
+    }
+
+    // Display message
+    printf("In B1FF-speak: ");
+    for (int i = 0; i < MSG_LEN; i++) {
+        if (msg[i] == '\n') break;
+        printf("%c", msg[i]);
+    } printf("!!!!!!!!!\n"); // Append exclamation marks
 }
 
 int main(void) {
-    repdig();
+    biff();
     return 0;
 }
 
