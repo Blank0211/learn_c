@@ -17,16 +17,18 @@ void walk(void) {
         for (int c = 0; c < col; c++)
             map[r][c] = '.'; // Set every element to '.'
  
-    char alph[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
-                     'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-                     'W', 'X', 'Y', 'Z'};
+    // char alph[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+                     // 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+                     // 'W', 'X', 'Y', 'Z'};
+
 
     srand(time(NULL));
     bool blocked_l, blocked_r, blocked_u, blocked_d;
-    int8_t pos_x = 0, pos_y = 0, ltr = 0, nxt_move;
-    map[pos_x][pos_y] = alph[ltr++]; // first move
+    int8_t pos_x = 0, pos_y = 0, nxt_move;
+    char ltr = 'A';
+    map[pos_x][pos_y] = ltr++; // first move
 
-    while (ltr < 26) {
+    while (ltr <= 'Z') {
         nxt_move = rand() % 4;
 
         // Check if at boundary or next point already used
@@ -37,7 +39,7 @@ void walk(void) {
 
         // Terminate program if surrounded
         if (blocked_r && blocked_l && blocked_u && blocked_d) break;
-        // Check if next move is valid
+        // If next move is invalid then skip.
         if (nxt_move == UP && blocked_u) continue; 
         if (nxt_move == DOWN && blocked_d) continue; 
         if (nxt_move == RIGHT && blocked_r) continue; 
@@ -52,7 +54,7 @@ void walk(void) {
         }
 
         // Move to next position
-        map[pos_x][pos_y] = alph[ltr++];
+        map[pos_x][pos_y] = ltr++;
     }
 
     // Display map
