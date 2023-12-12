@@ -13,8 +13,6 @@
 #define UP 1
 #define RIGHT 2
 #define DOWN 3
-bool chk_lu(uint8_t n) { return !(n > 0); }
-bool chk_rd(uint8_t n) { return !(n < 9); }
 
 void walk(void) {
     // Create a 10x10 map
@@ -26,7 +24,7 @@ void walk(void) {
  
     char alph[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
                      'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-                     'X', 'Y', 'Z'};
+                     'W', 'X', 'Y', 'Z'};
 
     srand(time(NULL));
     bool blocked_l, blocked_r, blocked_u, blocked_d;
@@ -37,10 +35,10 @@ void walk(void) {
         nxt_move = rand() % 4;
 
         // Check if at boundary or next point already used
-        blocked_r = chk_rd(pos_y) || map[pos_x][pos_y+1] != '.';
-        blocked_l = chk_lu(pos_y) || map[pos_x][pos_y-1] != '.';
-        blocked_u = chk_lu(pos_x) || map[pos_x-1][pos_y] != '.';
-        blocked_d = chk_rd(pos_x) || map[pos_x+1][pos_y] != '.';
+        blocked_r = !(pos_y < 9) || map[pos_x][pos_y+1] != '.';
+        blocked_l = !(pos_y > 0) || map[pos_x][pos_y-1] != '.';
+        blocked_u = !(pos_x > 0) || map[pos_x-1][pos_y] != '.';
+        blocked_d = !(pos_x < 9) || map[pos_x+1][pos_y] != '.';
 
         // Terminate program if surrounded
         if (blocked_r && blocked_l && blocked_u && blocked_d) break;
@@ -51,21 +49,32 @@ void walk(void) {
         if (nxt_move == LEFT && blocked_l) continue; 
 
         // Set next position
-        if (nxt_move == UP) pos_x--;
-        if (nxt_move == DOWN) pos_x++;
-        if (nxt_move == LEFT) pos_y--;
-        if (nxt_move == RIGHT) pos_y++;
+        switch (nxt_move) {
+            case UP:    pos_x--; break;
+            case DOWN:  pos_x++; break;
+            case LEFT:  pos_y--; break;
+            case RIGHT: pos_y++; break;
+        }
+        // if (nxt_move == UP) pos_x--;
+        // if (nxt_move == DOWN) pos_x++;
+        // if (nxt_move == LEFT) pos_y--;
+        // if (nxt_move == RIGHT) pos_y++;
 
         // Move to next position
-        map[pos_x][pos_y] = alph[ltr++];
+        // printf("Moving to: %d X %d | %c\n", pos_x, pos_y, alph[ltr]);
+        map[pos_x][pos_y] = alph[ltr];
+        ltr++;
     }
 
     // Display map
+    printf("\n   0 1 2 3 4 5 6 7 8 9\n");
     for (int r = 0; r < row; r++) {
+        printf("%d ", r);
         for (int c = 0; c < col; c++)
             printf(" %c", map[r][c]);
         printf("\n");
     }
+    printf("\n");
 }
 
 int main(void) {
