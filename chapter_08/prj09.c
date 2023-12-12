@@ -17,21 +17,19 @@ void walk(void) {
         for (int c = 0; c < col; c++)
             map[r][c] = '.'; // Set every element to '.'
  
-    // char alph[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
-                     // 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-                     // 'W', 'X', 'Y', 'Z'};
-
-
+    // Necessary variables
     srand(time(NULL));
-    bool blocked_l, blocked_r, blocked_u, blocked_d;
-    int8_t pos_x = 0, pos_y = 0, nxt_move;
+    bool blocked_l, blocked_r, blocked_u, blocked_d; // blocked directions
+    int8_t nxt_move;
+    int8_t pos_x = 0, pos_y = 0;
     char ltr = 'A';
-    map[pos_x][pos_y] = ltr++; // first move
 
+    // Start Walk
+    map[pos_x][pos_y] = ltr++; // first move
     while (ltr <= 'Z') {
         nxt_move = rand() % 4;
 
-        // Check if at boundary or next point already used
+        // Check if at boundary or if next point already used
         blocked_r = !(pos_y < 9) || map[pos_x][pos_y+1] != '.';
         blocked_l = !(pos_y > 0) || map[pos_x][pos_y-1] != '.';
         blocked_u = !(pos_x > 0) || map[pos_x-1][pos_y] != '.';
@@ -53,11 +51,11 @@ void walk(void) {
             case RIGHT: pos_y++; break;
         }
 
-        // Move to next position
+        // Move to next position (then update ltr)
         map[pos_x][pos_y] = ltr++;
     }
 
-    // Display map
+    // Display map after walk.
     printf("\n   0 1 2 3 4 5 6 7 8 9\n");
     for (int r = 0; r < row; r++) {
         printf("%d ", r);
