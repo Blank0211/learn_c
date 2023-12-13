@@ -17,7 +17,7 @@ void walk(void) {
         for (int c = 0; c < col; c++)
             map[r][c] = '.'; // Set every element to '.'
  
-    // Necessary variables
+    // Necessary variables for next moves
     srand(time(NULL));
     bool blocked_l, blocked_r, blocked_u, blocked_d; // blocked directions
     int8_t nxt_move;
@@ -29,15 +29,17 @@ void walk(void) {
     while (ltr <= 'Z') {
         nxt_move = rand() % 4;
 
-        // Check if at boundary or if next point already used
+        // Check if surrounding directions are blocked:
+        // a direction is blocked if (a) it is outsite the map
+        // or (b) it already has a letter assigned
         blocked_r = !(pos_y < 9) || map[pos_x][pos_y+1] != '.';
         blocked_l = !(pos_y > 0) || map[pos_x][pos_y-1] != '.';
         blocked_u = !(pos_x > 0) || map[pos_x-1][pos_y] != '.';
         blocked_d = !(pos_x < 9) || map[pos_x+1][pos_y] != '.';
 
-        // Terminate program if surrounded
+        // Terminate program if all direction blocked
         if (blocked_r && blocked_l && blocked_u && blocked_d) break;
-        // If next move is invalid then skip.
+        // redo if next move is toward blocked direction
         if (nxt_move == UP && blocked_u) continue; 
         if (nxt_move == DOWN && blocked_d) continue; 
         if (nxt_move == RIGHT && blocked_r) continue; 
