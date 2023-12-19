@@ -1,9 +1,9 @@
 
-int abs(int);
+int abs(int n);
 
-char *ampm(int);
+char *ampm(int hour_24);
 
-int to_12h(int);
+int to_12h(int hour_24);
 
 
 

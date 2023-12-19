@@ -7,7 +7,7 @@ char *ampm(int hour_24) {
     return "P.M.";
 }
 
-int to_12h(int hour) {
+int to_12h(int hour_24) {
     if (hour == 0) return 12;
     if (hour <= 12) return hour;
     return hour % 12;
