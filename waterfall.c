@@ -39,21 +39,19 @@ void dep(void) {
     uint8_t h, m; sscanf(buf, "%" SCNu8 " :%" SCNu8, &h, &m);
     uint16_t usr_time = h * 60 + m;
 
-    // Normalized departure times
+    // Normalized departure times: abs(time-in-mins MINUS usertime)
     uint16_t nd_t[DEPS];
-    for (int i = 0; i < DEPS; i++) {
+    for (int i = 0; i < DEPS; i++)
         nd_t[i] = abs((d_t[i][0] * 60 + d_t[i][1]) - usr_time);
-    }
 
-    for (int d = 0; d < DEPS - 1; d++) {
-        if (nd_t[d] < nd_t[d+1]) {
-            printf("Closest departure time is %.2d:%.2d %s, ", to_12h(d_t[d][0]), d_t[d][1], ampm(d_t[d][0]));
-            printf("arriving at %.2d:%.2d %s\n", to_12h(a_t[d][0]), a_t[d][1], ampm(a_t[d][0]));
-            return;
-        }
+    // Compare normalized dep times (to see which is closer to user-time)
+    int d;
+    for (d = 0; d < DEPS - 1; d++) {
+        if (nd_t[d] < nd_t[d+1])
+            break; // Break out of loop when closest dep time found
     }
-    printf("Closest departure time is %.2d:%.2d %s, ", to_12h(d_t[7][0]), d_t[7][1], ampm(d_t[7][0]));
-    printf("arriving at %.2d:%.2d %s\n", to_12h(a_t[7][0]), a_t[7][1], ampm(a_t[7][0]));
+    printf("Closest departure time is %.2d:%.2d %s, ", to_12h(d_t[d][0]), d_t[d][1], ampm(d_t[d][0]));
+    printf("arriving at %.2d:%.2d %s\n", to_12h(a_t[d][0]), a_t[d][1], ampm(a_t[d][0]));
 }
 
 int main(void) {
