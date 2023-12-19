@@ -8,8 +8,8 @@ char *ampm(int hour_24) {
 }
 
 int to_12h(int hour_24) {
-    if (hour == 0) return 12;
-    if (hour <= 12) return hour;
-    return hour % 12;
+    if (hour_24 == 0) return 12;
+    if (hour_24 <= 12) return hour_24;
+    return hour_24 % 12;
 }
 
