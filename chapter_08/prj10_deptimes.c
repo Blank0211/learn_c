@@ -70,5 +70,5 @@ int main(void) {
 
 // ============================================================================
 //*1   1 is first min of current day & -1 is last min of previous day.
-//     so -135 is 21:45 of previous day.
+//     so -135 is 21:45, last of previous day.
 
