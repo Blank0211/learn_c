@@ -9,7 +9,7 @@
 
 #define DEPS 9
 #define ARRS 9
-void dep(void) {
+int main(void) {
     // Departure times: {hour, min}
     uint16_t d_t[DEPS][2] = {
         {21, 45},    // last dep time of previous day
@@ -69,10 +69,7 @@ void dep(void) {
     // Display dep & arr time
     printf("Closest departure time is %.2d:%.2d %s, ", d_hour, d_mins, d_ampm);
     printf("arriving at %.2d:%.2d %s\n", a_hour, a_mins, a_ampm);
-}
 
-int main(void) {
-    dep();
     return 0;
 }
 
