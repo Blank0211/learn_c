@@ -8,12 +8,14 @@
 #define true 1
 #define false 0
 
-#define DEPS 8
-#define ARRS 8
+#define DEPS 9
+#define ARRS 9
 void dep(void) {
+    // Departure times: {hour, min}
     uint16_t d_t[DEPS][2] = {
-       {8, 0},      // Rows (2) represent hours and mins
-       {9, 43},     // Columns (8) represent departure times
+       {21, 45},    // last dep time of previous day
+       {8, 0},
+       {9, 43},
        {11, 19},
        {12, 47},
        {14, 0},
@@ -22,9 +24,11 @@ void dep(void) {
        {21, 45},
     };
 
+    // Arrival times: {hour, min}
     uint16_t a_t[ARRS][2] = {
-        {10, 16},   // Rows (2) represent hours and mins
-        {11, 52},   // Columns (8) represent arrival times
+        {23, 58},   // last arr time of previous day
+        {10, 16},
+        {11, 52},
         {13, 31},
         {15, 0},
         {16, 6},
@@ -39,9 +43,11 @@ void dep(void) {
     uint8_t h, m; sscanf(buf, "%" SCNu8 " :%" SCNu8, &h, &m);
     uint16_t usr_time = h * 60 + m;
 
+    // Process input
     // Normalized dep times: abs(time-in-mins MINUS usertime)
-    uint16_t nd_t[DEPS];
-    for (int i = 0; i < DEPS; i++)
+    int16_t nd_t[DEPS];
+    nd_t[0] = abs(-135 - usr_time); // Dep of previous day (see footnote *1)
+    for (int i = 1; i < DEPS; i++)
         nd_t[i] = abs((d_t[i][0] * 60 + d_t[i][1]) - usr_time);
 
     // Compare normalized dep times (to see which is closer to user-time)
@@ -52,6 +58,7 @@ void dep(void) {
     }
 
 
+    // Output
     int d_hour = to_12h(d_t[d][0]);
     int d_mins = d_t[d][1];
     char *d_ampm = ampm(d_t[d][0]);
@@ -69,4 +76,8 @@ int main(void) {
     dep();
     return 0;
 }
+
+// ============================================================================
+//*1   1 is first min of current day & -1 is last min of previous day.
+//     so -135 is 21:45 of previous day.
 
