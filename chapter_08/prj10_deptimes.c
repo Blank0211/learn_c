@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <inttypes.h>
-#include <stdlib.h>
 #include "../utils.h"
-
-#define bool _Bool
-#define true 1
-#define false 0
 
 #define DEPS 9
 #define ARRS 9
