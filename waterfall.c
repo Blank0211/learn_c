@@ -2,12 +2,14 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #define bool _Bool
 #define true 1
 #define false 0
 
 int main(void) {
+    
     return 0;
 }
 
