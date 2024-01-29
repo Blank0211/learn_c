@@ -1,8 +1,7 @@
 // clang % -o a.exe -std=c18 -Wall -Wextra -pedantic -Wformat=2 -g
 #include <stdio.h>
-#include <inttypes.h>
 #include <stdlib.h>
-#include <ctype.h>
+#include <inttypes.h>
 
 #define bool _Bool
 #define true 1
