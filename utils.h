@@ -7,7 +7,7 @@ int abs(int n);
 char *ampm(int hour_24);
 
 // Converts 24-hour time to 12-hour
-int to_12h(int hour_24);
+int to_h12(int hour_24);
 
 // Prints "\nERROR_[err_num]" and exits(0) program
 void err_exit(uint8_t err_num);
