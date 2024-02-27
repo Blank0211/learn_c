@@ -25,7 +25,7 @@ void err_exit(uint8_t err_num) {
 }
 
 // Returns: 0 on success. 1 if strtol fails. 2 if input out of range.
-int8_t get_d32(int32_t *n) {
+int8_t getd32(int32_t *n) {
     long tmp = 0;
     *n = 0;
 
@@ -34,9 +34,8 @@ int8_t get_d32(int32_t *n) {
     char buf[BUF_SIZE] = {0};
     uint8_t i = 0; // buf index
     char c = 0;
-    while ((c = getchar()) != '\n' && c != EOF) {
-        if (i < BUF_SIZE) buf[i++] = c;
-    }
+    while ((c = getchar()) != '\n' && c != EOF)
+        if (i < BUF_SIZE-1) buf[i++] = c; // "-1": Leave last element of buf
 
     // === [[ PROCESS INPUT ]] ===
     // errno can be set to any non-zero value by a library function call
@@ -63,4 +62,6 @@ int8_t get_d32(int32_t *n) {
     return 0;
 }
 
+
+// int main(void) {}
 
