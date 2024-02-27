@@ -4,7 +4,7 @@
 #include <errno.h> // Defines: errno, ERANGE
 #include "utils.h"
 
-#define BUF_SIZE 32 // Used in get_d32;
+#define BUF_SIZE 32 // Used in getd32;
 
 int abs(int n) { return n < 0 ? -n : n; }
 
